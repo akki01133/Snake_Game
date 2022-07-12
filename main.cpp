@@ -31,6 +31,11 @@ int i=0;
 string str1="New Game",str2="Load Game";
 int savedORdied = -1;
 
+bool changeFps = false;
+int initialFps = 110000;
+int decConstant = 4000;
+int fps = initialFps;
+
 //generate food
 void foodGen()
 {
@@ -207,6 +212,13 @@ void initials_load()
     
 }
 
+void handleFps(){
+  if(changeFps){
+    fps-= decConstant;
+    changeFps = false;
+  }
+}
+
 void printgrid(char grid[][gc])
 {   system("cls");
 
@@ -373,13 +385,15 @@ int main()
       initials_new();
     else if(start==2)
       initials_load();
-      
-
+ 
     //main program starts here
      while(!gameOver)      
      {   
          printgrid(grid);
-         usleep(120000);
+         if((len)%5 == 0){
+            handleFps();
+         }
+         usleep(fps);
      }
      sleep(1);
      system("cls");

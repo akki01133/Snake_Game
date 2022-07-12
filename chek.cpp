@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 int fx,fy,len;
 vector<pair<int,int>> V(len);
 int main()
